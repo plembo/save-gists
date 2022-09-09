@@ -1,24 +1,18 @@
+#!/usr/bin/env python
 """
 Save all gists from GitHub, including comments.
-
 Requires the PyGithub library (``pip install PyGithub>=1.47``).
-
 Pass a personal access token with the scope "gist" as the first
 argument.
-
 This probably won't work for large files (+10MiB), since they aren't
 returned by the GitHub API, and must be cloned instead.
 """
+import os
 import sys
 from github import Github
 from pathlib import Path
 
-try:
-    _prog, token = sys.argv
-except ValueError:
-    print("usage:", sys.argv[0], "<personal access token>")
-    sys.exit(1)
-
+token = os.getenv('GITHUB_TOKEN')
 gh = Github(token)
 
 base = Path.cwd()
@@ -78,3 +72,4 @@ for gist in user.get_gists():
 
 index_path = base / "index.md"
 index_path.write_text("\n".join(info), encoding="utf-8")
+
