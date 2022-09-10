@@ -153,3 +153,5 @@ cython_debug/
 
 # Exclude actual gists
 gists/
+# Exclude any tmp files
+tmp/
