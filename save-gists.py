@@ -9,18 +9,17 @@ Original code by Toby Fleming. "Backup all Gists from GitHub". _tobywf_,
 6 April 2020, https://tobywf.com/2020/04/backup-all-gists-from-github/
 (https://gist.github.com/tobywf/d7b4378417f4a10a75dd7245ec557240).
 
-Updated to use environment variable for token and argv for utput path.
+Updated to use environment variable for token and argv for output path.
 
-SYNTAX: ./save-gists.py /backup/github.com/plembo/gists
+SYNTAX: ./save-gists.py -path /backup/github.com/plembo/gists
 """
 import os
-# import sys
+import sys
 from github import Github
 from pathlib import Path
 
 token = os.getenv('GITHUB_TOKEN')
-# outpath = str(sys.argv[1])
-outpath = "/d1/backup/github.com/plembo/gists"
+outpath = str(sys.argv[2])
 base = Path(outpath)
 gh = Github(token)
 user = gh.get_user()
