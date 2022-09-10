@@ -14,12 +14,13 @@ Updated to use environment variable for token and argv for utput path.
 SYNTAX: ./save-gists.py /backup/github.com/plembo/gists
 """
 import os
-import sys
+# import sys
 from github import Github
 from pathlib import Path
 
 token = os.getenv('GITHUB_TOKEN')
-outpath = str(sys.argv[1])
+# outpath = str(sys.argv[1])
+outpath = "/d1/backup/github.com/plembo/gists"
 base = Path(outpath)
 gh = Github(token)
 user = gh.get_user()
