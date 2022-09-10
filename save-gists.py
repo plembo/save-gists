@@ -4,8 +4,14 @@ Save all gists from GitHub, including comments.
 Requires the PyGithub library (``pip install PyGithub>=1.47``).
 Pass a personal access token with the scope "gist" as the first
 argument.
-This probably won't work for large files (+10MiB), since they aren't
-returned by the GitHub API, and must be cloned instead.
+
+Original code by Toby Fleming. "Backup all Gists from GitHub". _tobywf_,
+6 April 2020, https://tobywf.com/2020/04/backup-all-gists-from-github/
+(https://gist.github.com/tobywf/d7b4378417f4a10a75dd7245ec557240).
+
+Updated to use environment variable for token and argv for utput path.
+
+SYNTAX: ./save-gists.py /backup/github.com/plembo/gists
 """
 import os
 import sys
@@ -13,9 +19,9 @@ from github import Github
 from pathlib import Path
 
 token = os.getenv('GITHUB_TOKEN')
+outpath = str(sys.argv[1])
+base = Path(outpath)
 gh = Github(token)
-
-base = Path.cwd()
 user = gh.get_user()
 info = [
     "# Gists",
@@ -23,7 +29,7 @@ info = [
 ]
 
 for gist in user.get_gists():
-    print("Gist", gist.id)
+    print(gist.id)
     gist_path = base / gist.id
     gist_path.mkdir(exist_ok=True)
 
@@ -72,4 +78,3 @@ for gist in user.get_gists():
 
 index_path = base / "index.md"
 index_path.write_text("\n".join(info), encoding="utf-8")
-
