@@ -9,9 +9,9 @@ Original code by Toby Fleming. "Backup all Gists from GitHub". _tobywf_,
 6 April 2020, https://tobywf.com/2020/04/backup-all-gists-from-github/
 (https://gist.github.com/tobywf/d7b4378417f4a10a75dd7245ec557240).
 
-Updated to use environment variable for token and argv for output path.
+Updated to use environment variable for token and argv for utput path.
 
-SYNTAX: ./save-gists.py -path /backup/github.com/plembo/gists
+SYNTAX: ./save-gists -p <backup location>
 """
 import os
 import sys
